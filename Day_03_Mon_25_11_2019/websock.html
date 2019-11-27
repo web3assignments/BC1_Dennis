@@ -1,0 +1,75 @@
+<style>
+        #gasBar {
+          padding: 15px;
+          margin: 20px;
+          width: 400px;
+          height: 8px;
+          text-align: center;
+        }
+        </style>
+        <head><script type = "text/javascript" src = "https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js" ></script></head>
+<body>
+Get latest Ethereum blocknumbers via websockets<br>
+Compare to <a href="https://etherscan.io/blocks" target="_blank">Etherscan</a>
+<div id="gasBar"></div>
+<pre id="log" style="width:100%;height:200px"></pre> 
+<script>
+function gasTekst(logstr) {   
+    document.getElementById("gasBar").innerHTML +=logstr+"\n";
+}
+function logClr(){
+    document.getElementById("log").innerHTML="";
+    document.getElementById("gasBar").innerHTML ="";
+}    
+function log(logstr) {   
+    document.getElementById("log").innerHTML +=logstr+"\n";
+}
+
+function loadbar(percent){
+    var bar = new ProgressBar.Line(gasBar, {
+  strokeWidth: 4,
+  easing: 'easeInOut',
+  duration: 1400,
+  color: '#FFEA82',
+  trailColor: '#000',
+  trailWidth: 1,
+  svgStyle: {width: '100%', height: '100%'},
+  from: {color: '#0f0'},
+  to: {color: '#f00'},
+  step: (state, bar) => {
+    bar.path.setAttribute('stroke', state.color);
+  }
+});
+
+bar.animate(percent);  // Number from 0.0 to 1.0
+}
+
+const server="wss://mainnet.infura.io/ws";
+log(`Opening connection to ${server}`);
+var socket = new WebSocket(server);
+socket.onopen = function (event) {
+    const request=JSON.stringify({"id": 1, "method": "eth_subscribe", "params": ["newHeads"]});
+    log(`Connection opened, sending: ${request}`);
+    socket.send(request); 
+};
+socket.onmessage = async function (event) {
+    logClr();
+    log(`Received ${event.data}`);
+    var data=JSON.parse(event.data);
+    log(`Current blocknumber = ${parseInt(data.params.result.number)}`);
+    var gasUsedPer= parseInt(data.params.result.gasUsed)/parseInt(data.params.result.gasLimit)*100;
+    gasTekst(`Gas used: ${gasUsedPer.toFixed(2)}%`);
+    loadbar(parseFloat(gasUsedPer)/100);
+    var miner = data.params.result.miner;
+    log(`miner was ${miner}`);
+    var date = new Date(1000*parseInt(data.params.result.timestamp));
+    log(`Timestamp ${date.toUTCString()}`);
+}
+socket.onerror = function(error) {
+    log(`[error] ${error.message}`);
+};
+
+
+</script>
+</body>
+
