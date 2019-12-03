@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="https://web3examples.com/logo.png">  
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta charset="UTF-8">  
+        <script src="https://cdn.jsdelivr.net/npm/babel-polyfill@6.26.0/dist/polyfill.min.js"></script>   
+       <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.2.1/dist/web3.min.js"></script>            
+    </head>
+<html>
+
+
+<style>
+.loader {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  text-align: center;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<h1>Roulette</h1>
+<pre id="contractaddress"></pre>
+Your Balance: <input type="text" name="balance" id="balance" value="0"/>ETH<br>
+Bank Balance: <input type="text" name="bank" id="bank" value="0"/>ETH<br>
+<br>
+Bet: <input type="text" name="bet" id="bet" value="0"/>ETH<br>
+Number<input type="number" name="playernumber" id="playernumber" value="0">pick a number between 0 and 36<br>
+<br>
+<div class="loader" id="spinner"  style="display:none">?</div>
+<input type="button" id="play" value="RIEN NE VA PLUS" style="border-radius: 10px;font-size : 30px;width: 200;height: 50;color:red;background-color:black " class="primary" onclick="doPlayNow()"/>
+<br>
+<pre id="log" style="width:100%;height:200px"></pre> 
+  
+    
+ <script>   
+        const contractCasino="0x05dAE9DF0A3B582FDBc25eC506e252B29bCECdfC"
+        const CasinoABI=[
+      {
+        "inputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "constructor"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "player",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "table",
+            "type": "uint256"
+          }
+        ],
+        "name": "rollResult",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "result",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "winner",
+            "type": "bool"
+          }
+        ],
+        "name": "rouletteOutcome",
+        "type": "event"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "AddToJackPot",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "number",
+            "type": "uint256"
+          }
+        ],
+        "name": "PlayerBet",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getBankBalance",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getRandom",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ];
+        var accounts
+
+        function EtherscanLink(pref,link) {
+           return '<a href="https://ropsten.etherscan.io/'+pref+"/"+link+'" target="_blank" >'+link+'</a>';           
+        }
+        
+        function log(str,...arguments) {        
+            var logstr=arguments.toString();
+            document.getElementById("log").innerHTML +=str+" "+logstr+"\n";
+        }
+		function logClr(){
+			document.getElementById("log").innerHTML="";
+		}   
+		
+		function cAdress(str,...arguments) {        
+            var logstr=arguments.toString();
+            document.getElementById("contractaddress").innerHTML +=str+" "+logstr+"\n";
+        }
+
+        function precise(x) {
+          return Number.parseFloat(x).toFixed(8);
+        }
+        
+        
+        async function doPlayNow() {
+		  logClr();
+          const CasinoContract   = new web3.eth.Contract(CasinoABI, contractCasino );
+          var bet = document.getElementById("bet").value;
+		  var payerNumber=document.getElementById("playernumber").value;
+          var betWei=web3.utils.toWei(bet )
+          document.getElementById("play").style.display = "none";
+          document.getElementById("spinner").style.display = "block";          
+          var result = await CasinoContract.methods.PlayerBet(payerNumber).send({from: accounts[0],value:betWei});
+          document.getElementById("spinner").style.display = "none";
+          document.getElementById("play").style.display = "block";
+          console.log(result);
+          var gasprice=await web3.eth.getGasPrice()   
+          log (`Gasused: ${precise(web3.utils.fromWei( (result.gasUsed*gasprice).toString(), 'ether'))} ETH`)         
+          console.log(web3.utils.hexToNumber(result.events["rollResult"].returnValues[1]));
+          var table=web3.utils.hexToNumber(result.events["rollResult"].returnValues[1]);          
+          if (table==payerNumber)
+             log(`Yes!!! You have won`)
+          else
+             log(`Sorry, you have lost`)
+          updateBalances() 
+        }
+        
+        async function updateBalances() {
+            var weiBalance=await web3.eth.getBalance(accounts[0])
+            var ethBalance = web3.utils.fromWei(weiBalance, 'ether');
+            document.getElementById("balance").value = precise(ethBalance).toString();
+            var weiBankBalance=await web3.eth.getBalance(contractCasino)
+            document.getElementById("bank").value = precise(web3.utils.fromWei(weiBankBalance, 'ether'));
+            var proposedBetWei=(Math.min(Number(weiBalance),Number(weiBankBalance))/100).toString() ;
+            document.getElementById("bet").value = precise(web3.utils.fromWei(proposedBetWei, 'ether'));
+            
+       }
+        
+        async function asyncloaded() {
+            if (typeof ethereum !== 'undefined')
+                await ethereum.enable().catch( (reason) => log('User rejected provider access',reason.message.substring(0,50)) )
+            if (! (Web3.givenProvider || ethereum) ) { // Checking if web3 is accessible
+                log("Web3 interface is not found. "+
+                "Please install <a href='https://metamask.io'>Metamask</a>"+
+                " or use <a href='https://www.opera.com/crypto'>Opera Crypto (android)");
+                return; // stop this function
+            }
+            web3 = new Web3(Web3.givenProvider || ethereum); // switch to version 1.0 when using metamask; provide web3 functions for Opera
+            //typeof web3 === 'undefined' || web3 == 'undefined'
+            log(`web3 is present: ${web3.version}`); // note: use ` (back quote)
+            const network = await web3.eth.net.getId().catch( (reason) => log(`Cannnot find network ${reason}`) );            
+            if (typeof network === 'undefined' || network != 3) 
+                { log("Please select Ropston test network");return;}
+            log("Ethereum network: Ropston")
+            accounts=await web3.eth.getAccounts();            
+            cAdress(`Contract address: ${EtherscanLink("address",contractCasino)}`);
+            updateBalances() 
+       }     
+       window.addEventListener('load', asyncloaded);       
+
+  </script>     
+        
+</html>
