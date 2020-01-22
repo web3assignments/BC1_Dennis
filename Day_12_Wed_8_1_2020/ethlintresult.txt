@@ -1,0 +1,76 @@
+E:\smartcontracts\ethlink\roulette.sol
+  6:2      error      Only use indent of 8 spaces.                                                              indentation
+  7:0      error      Only use indent of 4 spaces.                                                              indentation
+  8:2      error      Only use indent of 4 spaces.                                                              indentation
+  9:2      error      Only use indent of 4 spaces.                                                              indentation
+  10:2     error      Only use indent of 4 spaces.                                                              indentation
+  11:2     error      Only use indent of 4 spaces.                                                              indentation
+  12:2     error      Only use indent of 4 spaces.                                                              indentation
+  13:2     error      Only use indent of 4 spaces.                                                              indentation
+  14:2     error      Only use indent of 4 spaces.                                                              indentation
+  15:2     error      Only use indent of 4 spaces.                                                              indentation
+  16:2     error      Only use indent of 4 spaces.                                                              indentation
+  16:23    warning    Provide an error message for require()                                                    error-reason
+  17:2     error      Only use indent of 4 spaces.                                                              indentation
+  18:4     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  19:0     error      Only use indent of 4 spaces.                                                              indentation
+  20:2     error      Only use indent of 4 spaces.                                                              indentation
+  22:0     error      Only use indent of 4 spaces.                                                              indentation
+  23:2     error      Only use indent of 4 spaces.                                                              indentation
+  24:4     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  25:4     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  27:1     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  28:4     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  30:6     error      Only use indent of 8 spaces.                                                              indentation
+  30:6     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  34:2     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  35:0     error      Only use indent of 4 spaces.                                                              indentation
+  37:2     error      Only use indent of 4 spaces.                                                              indentation
+  39:6     error      Only use indent of 8 spaces.                                                              indentation
+  43:6     error      Only use indent of 8 spaces.                                                              indentation
+  46:4     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  47:0     error      Only use indent of 4 spaces.                                                              indentation
+  48:2     error      Only use indent of 4 spaces.                                                              indentation
+  50:6     error      Only use indent of 8 spaces.                                                              indentation
+  52:6     error      Only use indent of 8 spaces.                                                              indentation
+  54:0     error      Only use indent of 4 spaces.                                                              indentation
+  55:2     error      Only use indent of 4 spaces.                                                              indentation
+  56:4     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  58:7     error      Only use indent of 8 spaces.                                                              indentation
+  60:6     error      Only use indent of 8 spaces.                                                              indentation
+  62:0     error      Only use indent of 4 spaces.                                                              indentation
+  63:2     error      Only use indent of 4 spaces.                                                              indentation
+  65:0     error      Only use indent of 4 spaces.                                                              indentation
+  66:2     error      Only use indent of 4 spaces.                                                              indentation
+  68:0     error      Only use indent of 4 spaces.                                                              indentation
+  69:2     error      Only use indent of 4 spaces.                                                              indentation
+  71:0     error      Only use indent of 4 spaces.                                                              indentation
+  72:2     error      Only use indent of 4 spaces.                                                              indentation
+  75:5     error      Only use indent of 8 spaces.                                                              indentation
+  77:6     error      Only use indent of 8 spaces.                                                              indentation
+  79:4     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  80:0     error      Only use indent of 4 spaces.                                                              indentation
+  81:2     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  85:1     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  85:2     error      Only use indent of 4 spaces.                                                              indentation
+  86:91    warning    Avoid using 'block.timestamp'.                                                            security/no-block-members
+  87:21    warning    Single space should be either on both sides of '<=' or not at all.                        operator-whitespace
+  88:2     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  90:2     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  91:2     error      Only use indent of 4 spaces.                                                              indentation
+  92:6     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  93:1     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  94:5     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  95:5     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  97:1     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  97:27    warning    Single space should be either on both sides of '<=' or not at all.                        operator-whitespace
+  98:5     warning    Assignment operator must have exactly single space on both sides of it.                   operator-whitespace
+  98:32    warning    There should be no whitespace or comments between argument and the comma following it.    comma-whitespace
+  99:8     warning    Line contains trailing whitespace                                                         no-trailing-whitespace
+  101:8    error      Only use indent of 12 spaces.                                                             indentation
+  105:2    error      Only use indent of 4 spaces.                                                              indentation
+  107:0    error      Only use indent of 4 spaces.                                                              indentation
+  108:2    error      Only use indent of 4 spaces.                                                              indentation
+  110:0    error      Only use indent of 4 spaces.                                                              indentation
+
+✖ 47 errors, 26 warnings found.
