@@ -1,0 +1,20 @@
+Key management for the users of my contract.
+
+Since my contract is a casino game therefore I have a advice for two kind of users.
+These are normal players and high rollers and the difference between the two is. 
+The amount of crypto they have and are willing to spend on Roulette.
+
+For normal players I recommend a wallet like MetaMask because it’s easy to install on multiple devices and Is easy to use. 
+These kind of players don’t gamble with high bets and there for the wallet doesn’t need extra security and requires additional step before they can play a game. 
+A wallet like MetaMask doesn’t have a recovery feature if you what to recover your public key. 
+So I advise users to write down there mnemonic and store it in a safe place. 
+
+For the high rollers I recommend two kinds of wallets: a play wallet and a non-play wallet.
+the play wallet is the same as the wallet for normal players. 
+And is use when the want to gamble and should only keep a small amount of the crypto’s the user owns. 
+
+For the non-play wallet I recommend a Multisig wallet. 
+This wallet will contain the majority of the crypto’s and therefor should have more security since losing access to this wallet is has a higher risk.
+In addition if they want to transfer from the non-play to the play wallet they can choose a X out of Y confirmation before the currencies is transferred. 
+When X is greater than 1 you need at least 2 confirmation to send the currencies and so the risk of accidental transfer is lowered. 
+And this safer way to transfer but it’s not user friendly if you use this wallet for each time you want to spin the wheel.
